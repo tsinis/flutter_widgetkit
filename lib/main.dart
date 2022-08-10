@@ -5,7 +5,7 @@ import 'database.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final db = await SqlDatabase.load();
+  final db = await SqlDatabase.open;
   runApp(
     CupertinoApp(
       home: MyHomePage(await db.count, onUpdate: db.updateCount),
@@ -24,6 +24,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  static const _style = TextStyle(color: CupertinoColors.black);
+
   int _counter = 0;
 
   @override
@@ -37,8 +39,6 @@ class _MyHomePageState extends State<MyHomePage> {
     await widget.onUpdate(_counter);
     setState(() {});
   }
-
-  static const _style = TextStyle(color: CupertinoColors.black);
 
   @override
   Widget build(BuildContext context) => CupertinoPageScaffold(
@@ -55,12 +55,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 TextSpan(
                   text: '\nYou have pushed the button this many times:',
                   children: [
-                    const TextSpan(text: '\n\n'),
+                    const TextSpan(text: '\n'),
                     TextSpan(
                       text: _counter.toString(),
                       style: _style.copyWith(
                         fontWeight: FontWeight.bold,
-                        fontSize: 22,
+                        fontSize: 32,
                       ),
                     ),
                   ],
