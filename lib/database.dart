@@ -1,8 +1,7 @@
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 // ignore: depend_on_referenced_packages
-import 'package:path/path.dart';
-import 'dart:async';
+import 'package:path/path.dart' show join;
 
 class SqlDatabase {
   const SqlDatabase._(this._database);
