@@ -24,7 +24,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  static const _style = TextStyle(color: CupertinoColors.black);
+  static const _style = TextStyle(color: CupertinoColors.systemGrey);
 
   int _counter = 0;
 

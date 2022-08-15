@@ -1,4 +1,4 @@
-import 'package:path_provider/path_provider.dart';
+import 'package:app_group_directory/app_group_directory.dart';
 import 'package:sqflite/sqflite.dart';
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart' show join;
@@ -8,6 +8,7 @@ class SqlDatabase {
 
   final Database _database;
 
+  static const _appGroupId = 'group.com.example.flutterWidgetkit';
   static const _dbName = 'database.db';
   static const _id = 'id';
   static const _table = 'counter';
@@ -22,9 +23,10 @@ class SqlDatabase {
   }
 
   static Future<SqlDatabase> get open async {
-    final documentDirectory = await getApplicationDocumentsDirectory();
+    final directory = await AppGroupDirectory.getAppGroupDirectory(_appGroupId);
+    if (directory == null) throw Exception('App Group $_appGroupId not found!');
     final db = await openDatabase(
-      join(documentDirectory.path, _dbName),
+      join(directory.path, _dbName),
       version: 1,
       onCreate: (db, _) => db.execute("""
           CREATE TABLE $_table(

@@ -8,10 +8,10 @@ environment:
   sdk: ">=2.17.6 <3.0.0"
 
 dependencies:
+  app_group_directory: ^2.0.0
   cupertino_icons: ^1.0.5
   flutter:
     sdk: flutter
-  path_provider: ^2.0.11
   sqflite: ^2.0.3+1
 
 dev_dependencies:

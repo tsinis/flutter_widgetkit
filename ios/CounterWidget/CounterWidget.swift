@@ -10,12 +10,13 @@ import SwiftUI
 import Intents
 
 struct Provider: IntentTimelineProvider {
+
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationIntent())
+        SimpleEntry(date: Date(), configuration: ConfigurationIntent(), count: "1")
     }
 
     func getSnapshot(for configuration: ConfigurationIntent, in context: Context, completion: @escaping (SimpleEntry) -> ()) {
-        let entry = SimpleEntry(date: Date(), configuration: configuration)
+        let entry = SimpleEntry(date: Date(), configuration: configuration, count: "1")
         completion(entry)
     }
 
@@ -24,9 +25,12 @@ struct Provider: IntentTimelineProvider {
 
         // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
+        let db = type(of: DatabaseService()).init()
+        let count = db.getCount()
+
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
+            let entry = SimpleEntry(date: entryDate, configuration: configuration, count: count)
             entries.append(entry)
         }
 
@@ -38,13 +42,17 @@ struct Provider: IntentTimelineProvider {
 struct SimpleEntry: TimelineEntry {
     let date: Date
     let configuration: ConfigurationIntent
+    let count: String?
 }
 
 struct CounterWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        Text(entry.date, style: .time)
+        VStack {
+            Text("Count:")
+            Text(entry.count ?? "loading").font(.title)
+        }
     }
 }
 
@@ -63,7 +71,7 @@ struct CounterWidget: Widget {
 
 struct CounterWidget_Previews: PreviewProvider {
     static var previews: some View {
-        CounterWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent()))
+        CounterWidgetEntryView(entry: SimpleEntry(date: Date(), configuration: ConfigurationIntent(), count: "3"))
             .previewContext(WidgetPreviewContext(family: .systemSmall))
     }
 }
