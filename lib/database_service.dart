@@ -13,7 +13,7 @@ class DatabaseService {
   /// async `openDb()` since Dart doesn't have async factories/constructors.
   const DatabaseService._(this._db);
 
-  /// SQLite database to use, equivalent to Swift's OpaquePointer `db` variable.
+  /// SQLite database to use, equivalent to Swift's OpaquePointer `db` field.
   final Database _db;
 
   /// Few constants to use in the database, the same as
