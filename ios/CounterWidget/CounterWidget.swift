@@ -36,8 +36,10 @@ struct Provider: IntentTimelineProvider {
         // Nullable method, which should return stored value or return nil(null) if it's empty.
         let count = db.getCount()
         
-        // Try to reload home-screen widget every three minutes, but we rely on the update from the Dart side
-        let reloadDate = Calendar.current.date(byAdding: .minute, value: 3, to: currentDate)!
+        // Try to reload home-screen widget every 15 minutes, but we rely on the update from the Dart
+        // side. Because iOS widgets have a limited number of updates and if you were to try to
+        // update every few minutes, you'll quickly run out of updates.
+        let reloadDate = Calendar.current.date(byAdding: .minute, value: 15, to: currentDate)!
         // Same entry as default one but with current date and count value from database.
         let entry = SimpleEntry(date: currentDate, configuration: configuration, count: count)
         // Same timeline as defaut one but with single entry and new policy
