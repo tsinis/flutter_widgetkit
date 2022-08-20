@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart' show AsyncValueSetter;
 
-import 'database.dart';
+import 'database_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final db = await SqlDatabase.open;
+  final db = await DatabaseService.openDb;
   runApp(
     CupertinoApp(
       home: MyHomePage(await db.count, onUpdate: db.updateCount),
@@ -34,10 +34,10 @@ class _MyHomePageState extends State<MyHomePage> {
     _counter = widget.count ?? 0;
   }
 
-  Future<void> _incrementCounter() async {
-    _counter++;
-    await widget.onUpdate(_counter);
-    setState(() {});
+  Future<void> _incrementCounter() {
+    setState(() => _counter++);
+
+    return widget.onUpdate(_counter);
   }
 
   @override

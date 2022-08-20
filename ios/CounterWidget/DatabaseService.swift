@@ -9,6 +9,8 @@ import Foundation
 import SQLite3
 
 struct DatabaseService {
+    private let queryStatementInt = "SELECT value FROM counter;"
+    private let appGroupId = "group.com.example.flutterWidgetkit"
     private let dbPath: String = "database.db"
     private var db: OpaquePointer?
 
@@ -18,7 +20,6 @@ struct DatabaseService {
 
     func getCount() -> String? {
         var resultCount: String?
-        let queryStatementInt = "SELECT value FROM counter;"
         var queryStatement: OpaquePointer?
         let sqlState = sqlite3_prepare_v2(db, queryStatementInt, -1, &queryStatement, nil)
         if sqlState == SQLITE_OK {
@@ -30,19 +31,23 @@ struct DatabaseService {
             print("SELECT statement could not be prepared")
         }
         sqlite3_finalize(queryStatement)
+
         return resultCount
     }
 
     private func openDatabase() -> OpaquePointer? {
         let fileManager = FileManager.default
-        let directory = fileManager.containerURL(forSecurityApplicationGroupIdentifier: "group.com.example.flutterWidgetkit")
+        let directory = fileManager.containerURL(forSecurityApplicationGroupIdentifier: appGroupId)
         let dbFile = directory!.appendingPathComponent(dbPath)
         var db: OpaquePointer?
+
         if sqlite3_open(dbFile.path, &db) != SQLITE_OK {
-            print("error opening database")
+            print("Error opening database")
+
             return nil
         } else {
             print("Successfully opened connection to database at \(dbPath)")
+
             return db
         }
     }

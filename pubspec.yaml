@@ -1,4 +1,4 @@
-name: flutter_widgetkit
+name: flutter_widgetkit_example
 description: Example of Swift WidgetKit connection with Flutter app.
 publish_to: "none"
 
@@ -12,6 +12,7 @@ dependencies:
   cupertino_icons: ^1.0.5
   flutter:
     sdk: flutter
+  flutter_widgetkit: ^1.0.3
   sqflite: ^2.0.3+1
 
 dev_dependencies:
