@@ -8,7 +8,7 @@ Future<void> main() async {
   final db = await DatabaseService.openDb;
   runApp(
     CupertinoApp(
-      home: MyHomePage(await db.count, onUpdate: db.updateCount),
+      home: MyHomePage(await db.getCount(), onUpdate: db.updateCount),
     ),
   );
 }

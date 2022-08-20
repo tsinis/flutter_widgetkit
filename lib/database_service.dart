@@ -12,11 +12,12 @@ class DatabaseService {
   static const _appGroupId = 'group.com.example.flutterWidgetkit';
   static const _dbPath = 'database.db';
   static const _queryStatementInt = "SELECT value FROM counter;";
+  
   static const _id = 'id';
   static const _table = 'counter';
   static const _value = 'value';
 
-  Future<int?> get count async {
+  Future<int?> getCount() async {
     final map = await _database.rawQuery(_queryStatementInt);
     if (map.isEmpty) return null;
     final maybeCount = map.first[_value];

@@ -15,7 +15,7 @@ struct DatabaseService {
     private var db: OpaquePointer?
 
     init() {
-        db = openDatabase()
+        db = openDb()
     }
 
     func getCount() -> String? {
@@ -35,7 +35,7 @@ struct DatabaseService {
         return resultCount
     }
 
-    private func openDatabase() -> OpaquePointer? {
+    private func openDb() -> OpaquePointer? {
         let fileManager = FileManager.default
         let directory = fileManager.containerURL(forSecurityApplicationGroupIdentifier: appGroupId)
         let dbFile = directory!.appendingPathComponent(dbPath)
