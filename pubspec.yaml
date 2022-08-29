@@ -1,7 +1,7 @@
 name: flutter_widgetkit_example
 description: Example of Swift WidgetKit connection with Flutter app.
 maintainer: Roman Cinis
-repository: https://github.com/tsinis/colors_ai
+repository: https://github.com/tsinis/flutter_widgetkit
 version: 1.0.0+1
 publish_to: "none"
 
@@ -10,12 +10,12 @@ environment:
   flutter: ">=3.0.5"
 
 dependencies:
-  # DB file is stored at shared app-group directory, with this
+  # DB file is stored at the shared app-group directory, with this
   # app_group_directory package we can have access to it from Flutter.
   app_group_directory: ^2.0.0
 
-  # Just some fancy iOS style icons since app is made with
-  # Cupertino-like widgets and UX.
+  # Just some fancy iOS-style icons since the app
+  # is made with Cupertino-like widgets and UX.
   cupertino_icons: ^1.0.5
 
   # Flutter itself.
@@ -28,8 +28,8 @@ dependencies:
   flutter_widgetkit: ^1.0.3
 
   # Raw SQLite 3 package, used to store data in the app
-  # Swift side already has a SQLite3 library out-of-the-box.
-  # Use any other ORM you want, in this example we are using
+  # Swift side already has an SQLite3 library out-of-the-box.
+  # Use any other ORM you want, in this example, we are using
   # raw SQLite for showing raw queries from both Dart and Swift sides.
   sqflite: ^2.0.3+1
 

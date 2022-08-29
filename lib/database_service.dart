@@ -17,7 +17,7 @@ class DatabaseService {
   final Database _db;
 
   /// Few constants to use in the database, the same as
-  /// in Swift version of this class.
+  /// in the Swift version of this class.
   static const _appGroupId = 'group.com.example.flutterWidgetkit';
   static const _dbPath = 'database.db';
   static const _queryStatementInt = "SELECT value FROM counter;";
@@ -28,11 +28,11 @@ class DatabaseService {
   static const _table = 'counter';
   static const _value = 'value';
 
-  /// Same method as in Swift class, reads a value from the database,
-  /// with a raw SQL query and checking existence of the "count" value.
-  /// In Swift version we are returning String since we are showing it
-  /// as Text on home-screen widget, but in Dart we are returning integer
-  /// since we are increasing it with a taps on the button.
+  /// The same method as in the Swift class, reads a value from the database,
+  /// with a raw SQL query and checks existence of the "count" value. In the
+  /// Swift version, we are returning String since we are showing it as Text
+  /// on the home screen widget, but in Dart, we are returning integer since
+  /// we are increasing it with taps on the button.
   Future<int?> getCount() async {
     final map = await _db.rawQuery(_queryStatementInt);
     if (map.isEmpty) return null;
@@ -41,9 +41,9 @@ class DatabaseService {
     return maybeCount is int ? maybeCount : null;
   }
 
-  /// Same method as in Swift class, also opens a database from app group
-  /// directory and checking existence of the database. On the Dart side
-  /// we are also creating the database if it's not exists (on the first run).
+  /// The same method as in the Swift class also opens a database from the app
+  /// group directory and checks the existence of the database. On the Dart side
+  /// we are also creating the database if it does not exist (on the first run).
   static Future<DatabaseService> openDb() async {
     final directory = await AppGroupDirectory.getAppGroupDirectory(_appGroupId);
     if (directory == null) throw Exception('App Group $_appGroupId not found!');
@@ -63,17 +63,17 @@ class DatabaseService {
     return DatabaseService._(database);
   }
 
-  /// This method is only provided on Dart side, since Swift's home-screen
-  /// widget is in "read-only" mode and doesn't allow to update the count.
+  /// This method is only provided on the Dart side since Swift's home screen
+  /// widget is in "read-only" mode and doesn't allow updating the count.
   Future<void> updateCount(int count) async {
-    /// Insert new count to the database, if exists - just replaces it.
+    /// Insert a new count to the database, if exists - just replace it.
     await _db.insert(
       _table,
       {_id: _id, _value: count},
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
 
-    /// This will trigger a rebuild of the Swift's home-screen widget.
+    /// This will trigger a rebuild of Swift's home screen widget.
     return WidgetKit.reloadAllTimelines();
   }
 }

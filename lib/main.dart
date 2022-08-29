@@ -3,16 +3,16 @@ import 'package:flutter/foundation.dart' show AsyncValueSetter;
 
 import 'database_service.dart';
 
-/// Entry point for any Flutter application.
+/// The entry point for any Flutter application.
 Future<void> main() async {
   /// Need this one to initialize the database, but since DB service have no
-  /// idea when and from where it's being started, it's a good place use it.
+  /// idea when and from where it's being started, it's a good place to use it.
   WidgetsFlutterBinding.ensureInitialized();
 
-  /// Opens a database and returns a [DatabaseService] instance to store values.
+  /// Opens a database and returns an [DatabaseService] instance to store values.
   final db = await DatabaseService.openDb();
 
-  /// Run our app and provide initial count with save to DB callback.
+  /// Run our app and provide the initial count with saving to DB callback.
   runApp(
     CupertinoApp(
       home: MyHomePage(await db.getCount(), onUpdate: db.updateCount),
@@ -20,7 +20,7 @@ Future<void> main() async {
   );
 }
 
-/// Home page with a counter and a button to update it, similar to default one.
+/// Home page with a counter and a button to update it, similar to the default one.
 class MyHomePage extends StatefulWidget {
   const MyHomePage(this._storedCount, {required this.onUpdate, super.key});
 
@@ -56,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
     /// Update count on UI.
     setState(() => _counter++);
 
-    /// Update count in database.
+    /// Update count in the database.
     return widget.onUpdate(_counter);
   }
 
