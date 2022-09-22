@@ -6,8 +6,8 @@ version: 1.0.0+1
 publish_to: "none"
 
 environment:
-  sdk: ">=2.17.6 <3.0.0"
-  flutter: ">=3.0.5"
+  sdk: ">=2.18.1 <3.0.0"
+  flutter: ">=3.3.2"
 
 dependencies:
   # DB file is stored at the shared app-group directory, with this
@@ -31,7 +31,7 @@ dependencies:
   # Swift side already has an SQLite3 library out-of-the-box.
   # Use any other ORM you want, in this example, we are using
   # raw SQLite for showing raw queries from both Dart and Swift sides.
-  sqflite: ^2.0.3+1
+  sqflite: ^2.1.0
 
 dev_dependencies:
   flutter_lints: ^2.0.1
